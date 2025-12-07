@@ -1,4 +1,4 @@
-using TelemarketingApp.WebApi.Contexts;
+using TelemarketingApp.WebApi.DataContexts;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -5,169 +5,240 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TelemarketingApp.Desktop"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800">
-    <Grid Background="#F5F5F5">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+        Title="Телемаркетинг - Выбор тарифа" 
+        Height="750" 
+        Width="1200"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
+        Background="{StaticResource MtsLightGray}">
 
+    <Grid>
         <!-- Заголовок -->
-        <Border Grid.Row="0" Background="#0078D7" Padding="20">
-            <TextBlock Text="Выберите тариф" 
-                       Foreground="White" 
-                       FontSize="28" 
-                       FontWeight="Bold"
-                       HorizontalAlignment="Center"/>
+        <Border Grid.Row="0" Background="{StaticResource MtsRed}" Padding="25">
+            <StackPanel HorizontalAlignment="Center">
+                <TextBlock Text="Доступные тарифы" 
+                           Foreground="White" 
+                           FontSize="24" 
+                           FontWeight="SemiBold"
+                           Margin="0,5,0,0"/>
+            </StackPanel>
         </Border>
 
         <!-- Контейнер для тарифов -->
         <StackPanel Grid.Row="1" 
                     Orientation="Horizontal" 
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
+                    VerticalAlignment="Center"
+                    Margin="0,20,0,0">
 
             <!-- Тариф "Дома отлично" -->
-            <Border Width="320" 
-                    Height="450" 
-                    Background="White" 
-                    CornerRadius="10"
-                    Margin="20"
-                    BorderBrush="#E0E0E0" 
-                    BorderThickness="1">
-                <Border.Effect>
-                    <DropShadowEffect BlurRadius="10" 
-                                      Opacity="0.1" 
-                                      ShadowDepth="2"/>
-                </Border.Effect>
-
+            <Border Style="{StaticResource CardStyle}"
+                    Width="380" 
+                    Height="520" 
+                    Margin="20">
                 <StackPanel Margin="25">
-                    <TextBlock Text="Дома отлично" 
-                               FontSize="24" 
-                               FontWeight="Bold"
-                               Foreground="#0078D7"
-                               Margin="0,0,0,15"/>
+                    <!-- Заголовок тарифа -->
+                    <StackPanel Margin="0,0,0,15">
+                        <TextBlock Text="ДОМА" 
+                                   FontSize="18" 
+                                   FontWeight="Bold"
+                                   Foreground="{StaticResource MtsDarkGray}"/>
+                        <TextBlock Text="ОТЛИЧНО" 
+                                   FontSize="32" 
+                                   FontWeight="Bold"
+                                   Foreground="{StaticResource MtsRed}"
+                                   Margin="0,-5,0,0"/>
+                    </StackPanel>
 
-                    <Rectangle Height="3" Fill="#0078D7" Margin="0,0,0,20"/>
+                    <!-- Разделитель -->
+                    <Rectangle Height="3" Fill="{StaticResource MtsRed}" Margin="0,0,0,25"/>
 
-                    <StackPanel Margin="0,0,0,25">
-                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                            <TextBlock Text="✓" Foreground="Green" FontWeight="Bold" Margin="0,0,10,0"/>
+                    <!-- Список преимуществ -->
+                    <StackPanel Margin="0,0,0,30">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                            <TextBlock Text="✓" 
+                                       Foreground="{StaticResource MtsGreen}" 
+                                       FontWeight="Bold" 
+                                       FontSize="16"
+                                       Margin="0,0,12,0"
+                                       VerticalAlignment="Center"/>
                             <TextBlock Text="Безлимитный мобильный интернет" 
-                                       FontSize="14" 
-                                       TextWrapping="Wrap"/>
+                                       FontSize="15" 
+                                       TextWrapping="Wrap"
+                                       FontWeight="SemiBold"
+                                       VerticalAlignment="Center"/>
                         </StackPanel>
 
-                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                            <TextBlock Text="✓" Foreground="Green" FontWeight="Bold" Margin="0,0,10,0"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                            <TextBlock Text="✓" 
+                                       Foreground="{StaticResource MtsGreen}" 
+                                       FontWeight="Bold" 
+                                       FontSize="16"
+                                       Margin="0,0,12,0"
+                                       VerticalAlignment="Center"/>
                             <TextBlock Text="1000 минут" 
-                                       FontSize="14"/>
+                                       FontSize="15"
+                                       FontWeight="SemiBold"
+                                       VerticalAlignment="Center"/>
                         </StackPanel>
 
-                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                            <TextBlock Text="✓" Foreground="Green" FontWeight="Bold" Margin="0,0,10,0"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                            <TextBlock Text="✓" 
+                                       Foreground="{StaticResource MtsGreen}" 
+                                       FontWeight="Bold" 
+                                       FontSize="16"
+                                       Margin="0,0,12,0"
+                                       VerticalAlignment="Center"/>
                             <TextBlock Text="100 SMS" 
-                                       FontSize="14"/>
+                                       FontSize="15"
+                                       FontWeight="SemiBold"
+                                       VerticalAlignment="Center"/>
                         </StackPanel>
 
-                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                            <TextBlock Text="✓" Foreground="Green" FontWeight="Bold" Margin="0,0,10,0"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                            <TextBlock Text="✓" 
+                                       Foreground="{StaticResource MtsGreen}" 
+                                       FontWeight="Bold" 
+                                       FontSize="16"
+                                       Margin="0,0,12,0"
+                                       VerticalAlignment="Center"/>
                             <TextBlock Text="Домашний интернет 100 Мбит/с" 
-                                       FontSize="14" 
-                                       TextWrapping="Wrap"/>
+                                       FontSize="15" 
+                                       TextWrapping="Wrap"
+                                       FontWeight="SemiBold"
+                                       VerticalAlignment="Center"/>
                         </StackPanel>
 
-                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                            <TextBlock Text="✓" Foreground="Green" FontWeight="Bold" Margin="0,0,10,0"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                            <TextBlock Text="✓" 
+                                       Foreground="{StaticResource MtsGreen}" 
+                                       FontWeight="Bold" 
+                                       FontSize="16"
+                                       Margin="0,0,12,0"
+                                       VerticalAlignment="Center"/>
                             <TextBlock Text="220+ ТВ каналов" 
-                                       FontSize="14"/>
+                                       FontSize="15"
+                                       FontWeight="SemiBold"
+                                       VerticalAlignment="Center"/>
                         </StackPanel>
                     </StackPanel>
 
-                    <Border Background="#0078D7" 
-                            CornerRadius="5" 
-                            Margin="0,20,0,0"
-                            Height="40"
-                            VerticalAlignment="Bottom">
-                        <TextBlock Text="Рекомендуем" 
+                    <!-- Бейдж "Рекомендуем" -->
+                    <Border Background="{StaticResource MtsRed}" 
+                            CornerRadius="20" 
+                            Padding="15,8"
+                            HorizontalAlignment="Center">
+                        <TextBlock Text="РЕКОМЕНДУЕМ" 
                                    Foreground="White" 
-                                   FontSize="16"
-                                   FontWeight="SemiBold"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"/>
+                                   FontSize="14"
+                                   FontWeight="Bold"
+                                   HorizontalAlignment="Center"/>
                     </Border>
                 </StackPanel>
             </Border>
 
             <!-- Тариф "Дома супер" -->
-            <Border Width="320" 
-                    Height="450" 
-                    Background="White" 
-                    CornerRadius="10"
-                    Margin="20"
-                    BorderBrush="#E0E0E0" 
-                    BorderThickness="1">
-                <Border.Effect>
-                    <DropShadowEffect BlurRadius="10" 
-                                      Opacity="0.1" 
-                                      ShadowDepth="2"/>
-                </Border.Effect>
-
+            <Border Style="{StaticResource CardStyle}"
+                    Width="380" 
+                    Height="520" 
+                    Margin="20">
                 <StackPanel Margin="25">
-                    <TextBlock Text="Дома супер" 
-                               FontSize="24" 
-                               FontWeight="Bold"
-                               Foreground="#FF5722"
-                               Margin="0,0,0,15"/>
+                    <!-- Заголовок тарифа -->
+                    <StackPanel Margin="0,0,0,15">
+                        <TextBlock Text="ДОМА" 
+                                   FontSize="18" 
+                                   FontWeight="Bold"
+                                   Foreground="{StaticResource MtsDarkGray}"/>
+                        <TextBlock Text="СУПЕР" 
+                                   FontSize="32" 
+                                   FontWeight="Bold"
+                                   Foreground="{StaticResource MtsRed}"
+                                   Margin="0,-5,0,0"/>
+                    </StackPanel>
 
-                    <Rectangle Height="3" Fill="#FF5722" Margin="0,0,0,20"/>
+                    <!-- Разделитель -->
+                    <Rectangle Height="3" Fill="{StaticResource MtsRed}" Margin="0,0,0,25"/>
 
-                    <StackPanel Margin="0,0,0,25">
-                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                            <TextBlock Text="✓" Foreground="Green" FontWeight="Bold" Margin="0,0,10,0"/>
+                    <!-- Список преимуществ -->
+                    <StackPanel Margin="0,0,0,30">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                            <TextBlock Text="✓" 
+                                       Foreground="{StaticResource MtsGreen}" 
+                                       FontWeight="Bold" 
+                                       FontSize="16"
+                                       Margin="0,0,12,0"
+                                       VerticalAlignment="Center"/>
                             <TextBlock Text="Безлимитный мобильный интернет" 
-                                       FontSize="14" 
-                                       TextWrapping="Wrap"/>
+                                       FontSize="15" 
+                                       TextWrapping="Wrap"
+                                       FontWeight="SemiBold"
+                                       VerticalAlignment="Center"/>
                         </StackPanel>
 
-                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                            <TextBlock Text="✓" Foreground="Green" FontWeight="Bold" Margin="0,0,10,0"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                            <TextBlock Text="✓" 
+                                       Foreground="{StaticResource MtsGreen}" 
+                                       FontWeight="Bold" 
+                                       FontSize="16"
+                                       Margin="0,0,12,0"
+                                       VerticalAlignment="Center"/>
                             <TextBlock Text="Безлимитные минуты" 
-                                       FontSize="14"/>
+                                       FontSize="15"
+                                       FontWeight="SemiBold"
+                                       VerticalAlignment="Center"/>
                         </StackPanel>
 
-                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                            <TextBlock Text="✓" Foreground="Green" FontWeight="Bold" Margin="0,0,10,0"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                            <TextBlock Text="✓" 
+                                       Foreground="{StaticResource MtsGreen}" 
+                                       FontWeight="Bold" 
+                                       FontSize="16"
+                                       Margin="0,0,12,0"
+                                       VerticalAlignment="Center"/>
                             <TextBlock Text="Безлимитные SMS" 
-                                       FontSize="14"/>
+                                       FontSize="15"
+                                       FontWeight="SemiBold"
+                                       VerticalAlignment="Center"/>
                         </StackPanel>
 
-                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                            <TextBlock Text="✓" Foreground="Green" FontWeight="Bold" Margin="0,0,10,0"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                            <TextBlock Text="✓" 
+                                       Foreground="{StaticResource MtsGreen}" 
+                                       FontWeight="Bold" 
+                                       FontSize="16"
+                                       Margin="0,0,12,0"
+                                       VerticalAlignment="Center"/>
                             <TextBlock Text="Домашний интернет 100 Мбит/с" 
-                                       FontSize="14" 
-                                       TextWrapping="Wrap"/>
+                                       FontSize="15" 
+                                       TextWrapping="Wrap"
+                                       FontWeight="SemiBold"
+                                       VerticalAlignment="Center"/>
                         </StackPanel>
 
-                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                            <TextBlock Text="✓" Foreground="Green" FontWeight="Bold" Margin="0,0,10,0"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                            <TextBlock Text="✓" 
+                                       Foreground="{StaticResource MtsGreen}" 
+                                       FontWeight="Bold" 
+                                       FontSize="16"
+                                       Margin="0,0,12,0"
+                                       VerticalAlignment="Center"/>
                             <TextBlock Text="220+ ТВ каналов" 
-                                       FontSize="14"/>
+                                       FontSize="15"
+                                       FontWeight="SemiBold"
+                                       VerticalAlignment="Center"/>
                         </StackPanel>
                     </StackPanel>
 
-                    <Border Background="#FF5722" 
-                            CornerRadius="5" 
-                            Margin="0,20,0,0"
-                            Height="40"
-                            VerticalAlignment="Bottom">
-                        <TextBlock Text="Популярный" 
+                    <!-- Бейдж "Популярный" -->
+                    <Border Background="{StaticResource MtsRed}" 
+                            CornerRadius="20" 
+                            Padding="15,8"
+                            HorizontalAlignment="Center">
+                        <TextBlock Text="ПОПУЛЯРНЫЙ" 
                                    Foreground="White" 
-                                   FontSize="16"
-                                   FontWeight="SemiBold"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"/>
+                                   FontSize="14"
+                                   FontWeight="Bold"
+                                   HorizontalAlignment="Center"/>
                     </Border>
                 </StackPanel>
             </Border>
@@ -175,60 +246,83 @@
 
         <!-- Кнопка авторизации -->
         <Border Grid.Row="2" 
-                Background="White" 
-                Padding="20"
-                BorderBrush="#E0E0E0" 
+                Background="{StaticResource MtsWhite}" 
+                Padding="30"
+                Margin="0,30,0,0"
+                BorderBrush="{StaticResource MtsGray}" 
                 BorderThickness="0,1,0,0">
-            <Button x:Name="AuthButton" 
-                    Click="AuthButton_Click"
-                    Content="Авторизоваться" 
-                    Background="#0078D7"
-                    Foreground="White"
-                    FontSize="18"
-                    FontWeight="SemiBold"
-                    Height="50"
-                    Width="250"
-                    BorderBrush="Transparent"
-                    BorderThickness="0"
-                    Cursor="Hand">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="5"/>
-                    </Style>
-                </Button.Resources>
+            <StackPanel HorizontalAlignment="Center">
+                <!-- Форма авторизации -->
+                <Border Background="{StaticResource MtsLightGray}" 
+                        CornerRadius="10" 
+                        Padding="25"
+                        Width="400"
+                        Margin="0,0,0,20">
+                    <StackPanel>
+                        <TextBlock Text="Авторизация" 
+                                   FontSize="20" 
+                                   FontWeight="Bold"
+                                   Foreground="{StaticResource MtsRed}"
+                                   HorizontalAlignment="Center"
+                                   Margin="0,0,0,20"/>
 
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Border CornerRadius="5" 
-                                Background="{TemplateBinding Background}">
-                            <ContentPresenter HorizontalAlignment="Center" 
-                                              VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
+                        <StackPanel>
+                            <TextBlock Text="Логин" 
+                                       FontSize="14" 
+                                       FontWeight="SemiBold"
+                                       Margin="0,0,0,5"
+                                       Foreground="{StaticResource MtsDarkGray}"/>
+                            <TextBox x:Name="LoginTextBox" 
+                                     Style="{StaticResource MtsTextBox}"
+                                     Height="40"/>
 
-                <Button.Triggers>
-                    <EventTrigger RoutedEvent="MouseEnter">
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <ColorAnimation To="#005A9E" 
-                                                Duration="0:0:0.2" 
-                                                Storyboard.TargetProperty="Background.Color"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                    <EventTrigger RoutedEvent="MouseLeave">
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <ColorAnimation To="#0078D7" 
-                                                Duration="0:0:0.2" 
-                                                Storyboard.TargetProperty="Background.Color"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                </Button.Triggers>
-            </Button>
+                            <TextBlock Text="Пароль" 
+                                       FontSize="14" 
+                                       FontWeight="SemiBold"
+                                       Margin="0,15,0,5"
+                                       Foreground="{StaticResource MtsDarkGray}"/>
+                            <PasswordBox x:Name="PasswordBox" 
+                                         Height="40"
+                                         FontSize="14"
+                                         Padding="10"
+                                         BorderBrush="{StaticResource MtsGray}"
+                                         BorderThickness="1"
+                                         Margin="0,0,0,20"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- Кнопка -->
+                <Button x:Name="AuthButton" 
+                        Click="AuthButton_Click"
+                        Content="ВОЙТИ В СИСТЕМУ" 
+                        Style="{StaticResource MtsButton}"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Height="50"
+                        Width="300"
+                        Padding="40,0"/>
+            </StackPanel>
         </Border>
 
+        <!-- Футер -->
+        <Border Grid.Row="3" 
+                Background="{StaticResource MtsWhite}" 
+                Padding="15"
+                BorderBrush="{StaticResource MtsGray}" 
+                BorderThickness="0,1,0,0">
+            <TextBlock Text="Система управления заявками" 
+                       Foreground="{StaticResource MtsDarkGray}"
+                       HorizontalAlignment="Center"
+                       FontSize="12"/>
+        </Border>
+
+        <!-- Сетка для расположения элементов -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
     </Grid>
 </Window>

@@ -5,8 +5,119 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TelemarketingApp.Desktop"
         mc:Ignorable="d"
-        Title="ProfileWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="Личный кабинет" 
+        Height="650" 
+        Width="800"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+
+    <Grid Background="{StaticResource MtsLightGray}">
+        <Border Style="{StaticResource CardStyle}" Margin="20">
+            <Grid Margin="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Заголовок -->
+                    <RowDefinition Height="*"/>
+                    <!-- Основное содержимое -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Кнопка -->
+                </Grid.RowDefinitions>
+
+                <!-- Заголовок -->
+                <TextBlock Grid.Row="0"
+                           Text="Личный кабинет" 
+                           Style="{StaticResource WindowTitleStyle}"
+                           Margin="0,0,0,20"/>
+
+                <!-- Основное содержимое -->
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Левая колонка: информация о сотруднике -->
+                    <Border Grid.Column="0" 
+                            Margin="0,0,10,0"
+                            Padding="20"
+                            Background="{StaticResource MtsLightGray}"
+                            CornerRadius="10">
+                        <StackPanel>
+                            <TextBlock Text="👤 Информация о сотруднике" 
+                                       Style="{StaticResource SectionTitleStyle}"
+                                       Margin="0,0,0,15"/>
+
+                            <!-- Информация о сотруднике -->
+                            <StackPanel x:Name="EmployeeInfoPanel" Margin="0,0,0,20">
+                                <!-- Информация будет заполняться в коде -->
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Правая колонка: статистика -->
+                    <Border Grid.Column="1" 
+                            Margin="10,0,0,0">
+                        <StackPanel>
+                            <TextBlock Text="📊 Статистика по заявкам" 
+                                       Style="{StaticResource SectionTitleStyle}"
+                                       Margin="0,0,0,15"/>
+
+                            <!-- Карточки статистики -->
+                            <Border Style="{StaticResource CardStyle}"
+                                    Padding="20"
+                                    Margin="0,0,0,15">
+                                <StackPanel>
+                                    <TextBlock Text="📈 Общая статистика" 
+                                               FontSize="16"
+                                               FontWeight="Bold"
+                                               Foreground="{StaticResource MtsRed}"
+                                               Margin="0,0,0,10"/>
+
+                                    <StackPanel x:Name="StatisticsPanel">
+                                        <!-- Статистика будет заполняться в коде -->
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- График успешности -->
+                            <Border Style="{StaticResource CardStyle}"
+                                    Padding="20">
+                                <StackPanel>
+                                    <TextBlock Text="📊 Успешность заявок" 
+                                               FontSize="16"
+                                               FontWeight="Bold"
+                                               Foreground="{StaticResource MtsRed}"
+                                               Margin="0,0,0,10"/>
+
+                                    <!-- Простой график в виде прогресс-баров -->
+                                    <StackPanel x:Name="SuccessChartPanel" Margin="0,10,0,0">
+                                        <!-- График будет заполняться в коде -->
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+                <!-- Кнопка закрытия -->
+                <Button Grid.Row="2" 
+                        x:Name="CloseButton"
+                        Content="✕ Закрыть" 
+                        Style="{StaticResource MtsButton}"
+                        Background="{StaticResource MtsDarkGray}"
+                        Width="120"
+                        Height="40"
+                        FontSize="14"
+                        Margin="0,20,0,0"
+                        HorizontalAlignment="Center"
+                        Click="CloseButton_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </Grid>
+        </Border>
     </Grid>
 </Window>

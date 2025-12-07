@@ -4,9 +4,314 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TelemarketingApp.Desktop"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="CreateCallWindow" Height="450" Width="800">
-    <Grid>
-        
+         Title="Создание новой заявки" 
+        Height="800" 
+        Width="500"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+
+    <Grid Background="{StaticResource MtsLightGray}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Заголовок -->
+            <RowDefinition Height="*"/>
+            <!-- Форма -->
+            <RowDefinition Height="Auto"/>
+            <!-- Кнопки -->
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <Border Grid.Row="0" 
+                Background="{StaticResource MtsRed}" 
+                Padding="20">
+            <TextBlock Text="Создание новой заявки" 
+                       Foreground="{StaticResource MtsWhite}" 
+                       FontSize="24" 
+                       FontWeight="Bold"
+                       HorizontalAlignment="Center"/>
+        </Border>
+
+        <!-- Основная форма -->
+        <ScrollViewer Grid.Row="1" 
+                      Margin="20" 
+                      VerticalScrollBarVisibility="Auto"
+                      Padding="0"
+                      BorderThickness="0">
+            <Border Style="{StaticResource CardStyle}" Padding="30">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Адрес -->
+                    <TextBlock Grid.Row="0" Grid.Column="0" 
+                               Text="Адрес подключения:" 
+                               Style="{StaticResource RequiredFieldLabelStyle}"
+                               VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" 
+                             x:Name="AddressTextBox"
+                             Style="{StaticResource MtsTextBox}"
+                             Margin="0,0,0,15">
+                        <TextBox.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
+
+                    <!-- Услуга -->
+                    <TextBlock Grid.Row="1" Grid.Column="0" 
+                               Text="Услуга:" 
+                               Style="{StaticResource RequiredFieldLabelStyle}"
+                               VerticalAlignment="Center"/>
+                    <ComboBox Grid.Row="1" Grid.Column="1" 
+                              x:Name="ServiceComboBox"
+                              Style="{StaticResource MtsComboBox}"
+                              Margin="0,0,0,15"
+                              DisplayMemberPath="Title">
+                        <ComboBox.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5"/>
+                            </Style>
+                        </ComboBox.Resources>
+                    </ComboBox>
+
+                    <!-- Оборудование -->
+                    <TextBlock Grid.Row="2" Grid.Column="0" 
+                               Text="Оборудование:" 
+                               FontWeight="SemiBold"
+                               FontSize="14"
+                               Foreground="{StaticResource MtsDarkGray}"
+                               Margin="0,0,20,15"
+                               VerticalAlignment="Center"/>
+                    <ComboBox Grid.Row="2" Grid.Column="1" 
+                              x:Name="EquipmentComboBox"
+                              Style="{StaticResource MtsComboBox}"
+                              Margin="0,0,0,15"
+                              DisplayMemberPath="Title">
+                        <ComboBox.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5"/>
+                            </Style>
+                        </ComboBox.Resources>
+                    </ComboBox>
+
+                    <!-- ФИО клиента -->
+                    <TextBlock Grid.Row="3" Grid.Column="0" 
+                               Text="ФИО клиента:" 
+                               Style="{StaticResource RequiredFieldLabelStyle}"
+                               VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="3" Grid.Column="1" 
+                             x:Name="ClientNameTextBox"
+                             Style="{StaticResource MtsTextBox}"
+                             Margin="0,0,0,15">
+                        <TextBox.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
+
+                    <!-- Телефон клиента -->
+                    <TextBlock Grid.Row="4" Grid.Column="0" 
+                               Text="Телефон клиента:" 
+                               Style="{StaticResource RequiredFieldLabelStyle}"
+                               VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="4" Grid.Column="1" 
+                             x:Name="ClientPhoneTextBox"
+                             Style="{StaticResource MtsTextBox}"
+                             Margin="0,0,0,15">
+                        <TextBox.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
+
+                    <!-- Email клиента -->
+                    <TextBlock Grid.Row="5" Grid.Column="0" 
+                               Text="Email клиента:" 
+                               FontWeight="SemiBold"
+                               FontSize="14"
+                               Foreground="{StaticResource MtsDarkGray}"
+                               Margin="0,0,20,15"
+                               VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="5" Grid.Column="1" 
+                             x:Name="ClientEmailTextBox"
+                             Style="{StaticResource MtsTextBox}"
+                             Margin="0,0,0,15">
+                        <TextBox.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
+
+                    <!-- Дата подключения -->
+                    <TextBlock Grid.Row="6" Grid.Column="0" 
+                               Text="Дата подключения:" 
+                               Style="{StaticResource RequiredFieldLabelStyle}"
+                               VerticalAlignment="Center"/>
+                    <DatePicker Grid.Row="6" Grid.Column="1" 
+                                x:Name="ConnectionDatePicker"
+                                Height="40"
+                                Margin="0,0,0,15"
+                                SelectedDate="{x:Static system:DateTime.Now}"
+                                DisplayDateStart="{x:Static system:DateTime.Now}"
+                                BorderBrush="{StaticResource MtsGray}"
+                                BorderThickness="1">
+                        <DatePicker.Resources>
+                            <Style TargetType="DatePickerTextBox">
+                                <Setter Property="Background" Value="{StaticResource MtsWhite}"/>
+                                <Setter Property="Padding" Value="10"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{StaticResource MtsLightGray}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DatePicker.Resources>
+                    </DatePicker>
+
+                    <!-- Комментарий -->
+                    <TextBlock Grid.Row="7" Grid.Column="0" 
+                               Text="Комментарий:" 
+                               FontWeight="SemiBold"
+                               FontSize="14"
+                               Foreground="{StaticResource MtsDarkGray}"
+                               Margin="0,0,20,15"
+                               VerticalAlignment="Top"/>
+                    <TextBox Grid.Row="7" Grid.Column="1" 
+                             x:Name="CommentTextBox"
+                             Height="120"
+                             Margin="0,0,0,15"
+                             Padding="10"
+                             TextWrapping="Wrap"
+                             AcceptsReturn="True"
+                             VerticalScrollBarVisibility="Auto"
+                             BorderBrush="{StaticResource MtsGray}"
+                             BorderThickness="1"
+                             Background="{StaticResource MtsWhite}">
+                        <TextBox.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5"/>
+                            </Style>
+                        </TextBox.Resources>
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Style.Triggers>
+                                    <Trigger Property="IsFocused" Value="True">
+                                        <Setter Property="BorderBrush" Value="{StaticResource MtsRed}"/>
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="BorderBrush" Value="{StaticResource MtsDarkGray}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+
+                    <!-- Продолжительность -->
+                    <TextBlock Grid.Row="8" Grid.Column="0" 
+                               Text="Продолжительность (мин):" 
+                               FontWeight="SemiBold"
+                               FontSize="14"
+                               Foreground="{StaticResource MtsDarkGray}"
+                               Margin="0,0,20,15"
+                               VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="8" Grid.Column="1" 
+                             x:Name="DurationTextBox"
+                             Style="{StaticResource MtsTextBox}"
+                             Margin="0,0,0,15"
+                             Text="30">
+                        <TextBox.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
+
+                    <!-- Результат -->
+                    <TextBlock Grid.Row="9" Grid.Column="0" 
+                               Text="Результат:" 
+                               FontWeight="SemiBold"
+                               FontSize="14"
+                               Foreground="{StaticResource MtsDarkGray}"
+                               Margin="0,0,20,15"
+                               VerticalAlignment="Center"/>
+                    <ComboBox Grid.Row="9" Grid.Column="1" 
+                              x:Name="ResultComboBox"
+                              Style="{StaticResource MtsComboBox}"
+                              Margin="0,0,0,15">
+                        <ComboBox.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5"/>
+                            </Style>
+                        </ComboBox.Resources>
+                        <ComboBoxItem Content="Успешно"/>
+                        <ComboBoxItem Content="Отказ"/>
+                        <ComboBoxItem Content="Перенос"/>
+                        <ComboBoxItem Content="Дозвониться не удалось"/>
+                    </ComboBox>
+
+                </Grid>
+            </Border>
+        </ScrollViewer>
+
+        <!-- Кнопки действий -->
+        <Border Grid.Row="2" 
+                Background="{StaticResource MtsWhite}" 
+                Padding="20"
+                BorderBrush="{StaticResource MtsGray}" 
+                BorderThickness="0,1,0,0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="CreateButton" 
+                        Content="💾 Создать заявку" 
+                        Style="{StaticResource MtsButton}"
+                        Background="{StaticResource MtsGreen}"
+                        Width="180"
+                        Height="45"
+                        FontSize="16"
+                        Margin="0,0,20,0"
+                        Click="CreateButton_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <Button x:Name="CancelButton" 
+                        Content="✕ Отмена" 
+                        Style="{StaticResource MtsButton}"
+                        Background="{StaticResource MtsDarkGray}"
+                        Width="120"
+                        Height="45"
+                        FontSize="16"
+                        Click="CancelButton_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>

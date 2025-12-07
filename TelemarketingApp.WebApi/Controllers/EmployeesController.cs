@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using TelemarketingApp.WebApi.Contexts;
+using TelemarketingApp.WebApi.DataContexts;
 using TelemarketingApp.WebApi.Models;
 
 namespace TelemarketingApp.WebApi.Controllers
@@ -45,48 +45,7 @@ namespace TelemarketingApp.WebApi.Controllers
         // PUT: api/Employees/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEmployee(int id, Employee employee)
-        {
-            if (id != employee.EmployeeId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(employee).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!EmployeeExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/Employees
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Employee>> PostEmployee(Employee employee)
-        {
-            _context.Employees.Add(employee);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetEmployee", new { id = employee.EmployeeId }, employee);
-        }
-
-        // DELETE: api/Employees/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteEmployee(int id)
+        public async Task<IActionResult> UpdateEmployee(int id, [FromBody] UpdateEmployeeRequest request)
         {
             var employee = await _context.Employees.FindAsync(id);
             if (employee == null)
@@ -94,15 +53,139 @@ namespace TelemarketingApp.WebApi.Controllers
                 return NotFound();
             }
 
-            _context.Employees.Remove(employee);
+            // Проверяем уникальность логина (если логин изменился)
+            if (employee.Login != request.Login)
+            {
+                bool loginExists = await _context.Employees.AnyAsync(e => e.Login == request.Login);
+                if (loginExists)
+                {
+                    return BadRequest(new { message = "Пользователь с таким логином уже существует" });
+                }
+            }
+
+            employee.Surname = request.Surname;
+            employee.Name = request.Name;
+            employee.Patronymic = request.Patronymic;
+            employee.Login = request.Login;
+            employee.Email = request.Email;
+            employee.RoleId = request.RoleId;
+
+            // Обновляем пароль только если он указан
+            if (!string.IsNullOrWhiteSpace(request.Password))
+            {
+                employee.Password = request.Password;
+            }
+
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        // POST: api/Employees
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<Employee>> CreateEmployee([FromBody] CreateEmployeeRequest request)
+        {
+            if (string.IsNullOrWhiteSpace(request.Surname) ||
+                string.IsNullOrWhiteSpace(request.Name) ||
+                string.IsNullOrWhiteSpace(request.Login) ||
+                string.IsNullOrWhiteSpace(request.Password))
+            {
+                return BadRequest(new { message = "Фамилия, имя, логин и пароль обязательны" });
+            }
+
+            bool loginExists = await _context.Employees.AnyAsync(e => e.Login == request.Login);
+            if (loginExists)
+            {
+                return BadRequest(new { message = "Пользователь с таким логином уже существует" });
+            }
+
+            var employee = new Employee
+            {
+                Surname = request.Surname,
+                Name = request.Name,
+                Patronymic = request.Patronymic,
+                Login = request.Login,
+                Password = request.Password,
+                Email = request.Email,
+                RoleId = request.RoleId
+            };
+
+            _context.Employees.Add(employee);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetEmployees), new { id = employee.EmployeeId }, employee);
+        }
+
+        [HttpPut("{id}/status")]
+        public async Task<IActionResult> UpdateEmployeeStatus(int id, [FromBody] UpdateStatusRequest request)
+        {
+            var employee = await _context.Employees.FindAsync(id);
+            if (employee == null)
+            {
+                return NotFound();
+            }
+
+            // Логируем полученные данные
+            Console.WriteLine($"Получен запрос на изменение статуса: IsActive = {request.IsActive}");
+
+            // Конвертируем bool в ulong (если request.IsActive имеет тип bool)
+            // Или напрямую присваиваем (если request.IsActive имеет тип ulong)
+            employee.IsActive = request.IsActive; // Если request.IsActive уже ulong
+
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool EmployeeExists(int id)
+        // DELETE: api/Employees/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteEmployee(int id)
         {
-            return _context.Employees.Any(e => e.EmployeeId == id);
+            var employee = await _context.Employees
+                .Include(e => e.Calls)
+                .FirstOrDefaultAsync(e => e.EmployeeId == id);
+
+            if (employee == null)
+            {
+                return NotFound();
+            }
+
+            if (employee.Calls.Any())
+            {
+                return Conflict(new { message = "Нельзя удалить сотрудника, у которого есть заявки" });
+            }
+
+            _context.Employees.Remove(employee);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
         }
+    }
+
+    public class UpdateStatusRequest
+    {
+        public ulong IsActive { get; set; }
+    }
+
+    public class UpdateEmployeeRequest
+    {
+        public string Surname { get; set; }
+        public string Name { get; set; }
+        public string Patronymic { get; set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
+        public string Email { get; set; }
+        public int RoleId { get; set; }
+    }
+
+    public class CreateEmployeeRequest
+    {
+        public string Surname { get; set; }
+        public string Name { get; set; }
+        public string Patronymic { get; set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
+        public string Email { get; set; }
+        public int RoleId { get; set; }
     }
 }

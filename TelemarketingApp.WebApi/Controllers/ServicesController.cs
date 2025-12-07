@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using TelemarketingApp.WebApi.Contexts;
+using TelemarketingApp.WebApi.DataContexts;
 using TelemarketingApp.WebApi.Models;
 
 namespace TelemarketingApp.WebApi.Controllers

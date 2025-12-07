@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore.MySql.Scaffolding.Internal;
 using TelemarketingApp.WebApi.Models;
 
-namespace TelemarketingApp.WebApi.Contexts;
+namespace TelemarketingApp.WebApi.DataContexts;
 
 public partial class AppDbContext : DbContext
 {
@@ -134,6 +134,10 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.Email)
                 .HasMaxLength(50)
                 .HasColumnName("email");
+            entity.Property(e => e.IsActive)
+                .HasDefaultValueSql("b'1'")
+                .HasColumnType("bit(1)")
+                .HasColumnName("is_active");
             entity.Property(e => e.Login)
                 .HasMaxLength(20)
                 .HasColumnName("login");

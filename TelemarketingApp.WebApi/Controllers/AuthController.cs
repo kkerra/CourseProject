@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using TelemarketingApp.WebApi.Contexts;
+using TelemarketingApp.WebApi.DataContexts;
 using TelemarketingApp.WebApi.Models;
 
 namespace TelemarketingApp.WebApi.Controllers
@@ -35,15 +35,15 @@ namespace TelemarketingApp.WebApi.Controllers
                 return Unauthorized(new { message = "Неверный логин или пароль" });
             }
 
-            var response = new Employee
+            var response = new
             {
-                EmployeeId = employee.EmployeeId,
-                Surname = employee.Surname,
-                Name = employee.Name,
-                Patronymic = employee.Patronymic,
-                Login = employee.Login,
-                Email = employee.Email,
-                RoleId = employee.RoleId
+                employee.EmployeeId,
+                employee.Surname,
+                employee.Name,
+                employee.Patronymic,
+                employee.Login,
+                employee.Email,
+                employee.RoleId
             };
 
             return Ok(response);

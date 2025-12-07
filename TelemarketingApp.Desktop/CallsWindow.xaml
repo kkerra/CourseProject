@@ -5,249 +5,446 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TelemarketingApp.Desktop"
         mc:Ignorable="d"
-        Title="CallWindow" Height="450" Width="800" Loaded="CallsWindow_Loaded">
-    <Grid Background="#F5F5F5">
+        Title="МТС Телемаркетинг - Управление заявками" 
+        Height="700" 
+        Width="1000"
+        WindowState="Maximized"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource MtsLightGray}"
+        Loaded="CallsWindow_Loaded">
+
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <!-- Верхняя панель -->
             <RowDefinition Height="*"/>
+            <!-- Основной контент -->
             <RowDefinition Height="Auto"/>
+            <!-- Статусная строка -->
         </Grid.RowDefinitions>
 
-        <Border Grid.Row="0" Background="#2C3E50" Padding="10">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+        <!-- Верхняя панель (логотип и информация) -->
+        <Border Grid.Row="0" Background="{StaticResource MtsRed}" Padding="15">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
 
-                <Button x:Name="CreateCallButton" 
-                        Content="➕ Создать заявку" 
-                        Background="#3498DB"
-                        Foreground="White"
-                        FontSize="14"
-                        FontWeight="SemiBold"
+                <!-- Логотип и название -->
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                    <StackPanel>
+                        <TextBlock x:Name="RoleText" 
+                                   Text="" 
+                                   Foreground="{StaticResource MtsWhite}" 
+                                   FontSize="12" 
+                                   Opacity="0.9"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Информация о сотруднике -->
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="👤" FontSize="16" Foreground="{StaticResource MtsWhite}" Margin="0,0,10,0"/>
+                    <TextBlock x:Name="WelcomeText" 
+                               Text="Загрузка..." 
+                               Foreground="{StaticResource MtsWhite}" 
+                               FontSize="16" 
+                               FontWeight="SemiBold"/>
+                </StackPanel>
+
+                <!-- Кнопка выхода -->
+                <Button Grid.Column="2"
+                        Content="Выход" 
+                        Style="{StaticResource MtsButton}"
+                        Background="{StaticResource MtsWhite}"
+                        Foreground="{StaticResource MtsRed}"
                         Height="35"
-                        Padding="15,0"
-                        Margin="0,0,10,0"
-                        BorderBrush="Transparent"
-                        BorderThickness="0"
-                        Cursor="Hand"
-                        Click="CreateCallButton_Click">
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <Border CornerRadius="5" 
-                                    Background="{TemplateBinding Background}">
-                                <ContentPresenter HorizontalAlignment="Center" 
-                                                  VerticalAlignment="Center"/>
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                    <Button.Triggers>
-                        <EventTrigger RoutedEvent="MouseEnter">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimation To="#2980B9" 
-                                                    Duration="0:0:0.2" 
-                                                    Storyboard.TargetProperty="Background.Color"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                        <EventTrigger RoutedEvent="MouseLeave">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimation To="#3498DB" 
-                                                    Duration="0:0:0.2" 
-                                                    Storyboard.TargetProperty="Background.Color"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                    </Button.Triggers>
-                </Button>
-
-                <Button x:Name="ProfileButton" 
-                        Content="👤 Личный кабинет" 
-                        Background="#1ABC9C"
-                        Foreground="White"
-                        FontSize="14"
-                        FontWeight="SemiBold"
-                        Height="35"
-                        Padding="15,0"
-                        Margin="0,0,10,0"
-                        BorderBrush="Transparent"
-                        BorderThickness="0"
-                        Cursor="Hand"
-                        Click="ProfileButton_Click">
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <Border CornerRadius="5" 
-                                    Background="{TemplateBinding Background}">
-                                <ContentPresenter HorizontalAlignment="Center" 
-                                                  VerticalAlignment="Center"/>
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                    <Button.Triggers>
-                        <EventTrigger RoutedEvent="MouseEnter">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimation To="#16A085" 
-                                                    Duration="0:0:0.2" 
-                                                    Storyboard.TargetProperty="Background.Color"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                        <EventTrigger RoutedEvent="MouseLeave">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimation To="#1ABC9C" 
-                                                    Duration="0:0:0.2" 
-                                                    Storyboard.TargetProperty="Background.Color"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                    </Button.Triggers>
-                </Button>
-
-                <Button x:Name="RefreshButton" 
-                        Content="🔄 Обновить" 
-                        Background="#95A5A6"
-                        Foreground="White"
-                        FontSize="14"
-                        FontWeight="SemiBold"
-                        Height="35"
-                        Padding="15,0"
-                        Margin="0,0,10,0"
-                        BorderBrush="Transparent"
-                        BorderThickness="0"
-                        Cursor="Hand"
-                        Click="RefreshButton_Click">
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <Border CornerRadius="5" 
-                                    Background="{TemplateBinding Background}">
-                                <ContentPresenter HorizontalAlignment="Center" 
-                                                  VerticalAlignment="Center"/>
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
-
-                <Button x:Name="LogoutButton" 
-                        Content="🚪 Выход" 
-                        Background="#E74C3C"
-                        Foreground="White"
-                        FontSize="14"
-                        FontWeight="SemiBold"
-                        Height="35"
-                        Padding="15,0"
-                        BorderBrush="Transparent"
-                        BorderThickness="0"
-                        Cursor="Hand"
-                        Click="LogoutButton_Click">
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <Border CornerRadius="5" 
-                                    Background="{TemplateBinding Background}">
-                                <ContentPresenter HorizontalAlignment="Center" 
-                                                  VerticalAlignment="Center"/>
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
-
-            </StackPanel>
+                        Padding="20,0"
+                        Click="LogoutButton_Click"/>
+            </Grid>
         </Border>
 
-        <!-- Информация о сотруднике -->
-        <Border Grid.Row="1" Background="#0078D7" Padding="20">
+        <!-- Основной контент -->
+        <Grid Grid.Row="1" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="220"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Левая панель - навигация -->
+            <Border Grid.Column="0" 
+                    Style="{StaticResource CardStyle}"
+                    Margin="0,0,10,0">
+                <StackPanel Margin="15">
+                    <TextBlock Text="Навигация" 
+                               Style="{StaticResource SectionTitleStyle}"/>
+
+                    <Button x:Name="CreateCallButton" 
+                            Content="📞 Создать заявку" 
+                            Style="{StaticResource MtsButton}"
+                            Margin="0,0,0,10"
+                            Height="40"
+                            Click="CreateCallButton_Click"/>
+
+                    <Button x:Name="AddClientButton" 
+                            Content="👥 Клиенты" 
+                            Style="{StaticResource MtsButton}"
+                            Background="{StaticResource MtsPurple}"
+                            Margin="0,0,0,10"
+                            Height="40"
+                            Click="AddClientButton_Click"/>
+
+                    <Button x:Name="EmployeesButton" 
+                            Content="👨‍💼 Сотрудники" 
+                            Style="{StaticResource MtsButton}"
+                            Background="{StaticResource MtsGreen}"
+                            Margin="0,0,0,10"
+                            Height="40"
+                            Click="EmployeesButton_Click"
+                            Visibility="Collapsed"/>
+
+                    <Button x:Name="AllCallsButton" 
+                            Content="📋 Все заявки" 
+                            Style="{StaticResource MtsButton}"
+                            Background="{StaticResource MtsPurple}"
+                            Margin="0,0,0,10"
+                            Height="40"
+                            Click="AllCallsButton_Click"
+                            Visibility="Collapsed"/>
+
+                    <Button x:Name="ExportButton" 
+                            Content="📊 Экспорт" 
+                            Style="{StaticResource MtsButton}"
+                            Background="{StaticResource MtsGreen}"
+                            Margin="0,0,0,10"
+                            Height="40"
+                            Click="ExportButton_Click"
+                            Visibility="Collapsed"/>
+
+                    <Button x:Name="ProfileButton" 
+                            Content="⚙️ Профиль" 
+                            Style="{StaticResource MtsButton}"
+                            Background="{StaticResource MtsBlue}"
+                            Margin="0,0,0,10"
+                            Height="40"
+                            Click="ProfileButton_Click"/>
+
+                    <Button x:Name="RefreshButton" 
+                            Content="🔄 Обновить" 
+                            Style="{StaticResource MtsButton}"
+                            Background="{StaticResource MtsDarkGray}"
+                            Margin="0,0,0,10"
+                            Height="40"
+                            Click="RefreshButton_Click"/>
+
+                    <!-- Режим просмотра -->
+                    <Border Background="{StaticResource MtsLightGray}" 
+                            CornerRadius="8" 
+                            Padding="12"
+                            Margin="0,20,0,0">
+                        <StackPanel>
+                            <TextBlock Text="Режим:" 
+                                       FontSize="13"
+                                       FontWeight="SemiBold"
+                                       Margin="0,0,0,5"/>
+                            <TextBlock x:Name="ModeText"
+                                       Text="Мои заявки" 
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       Foreground="{StaticResource MtsRed}"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Border>
+
+            <!-- Правая панель - список заявок -->
+            <Border Grid.Column="1" 
+                    Style="{StaticResource CardStyle}">
+                <Grid Margin="15">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Заголовок таблицы -->
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,20">
+                        <TextBlock Text="📋" FontSize="22" Margin="0,0,10,0"/>
+                        <TextBlock Text="Список заявок" 
+                                   FontSize="20" 
+                                   FontWeight="Bold"
+                                   Foreground="{StaticResource MtsRed}"/>
+                    </StackPanel>
+
+                    <!-- Таблица заявок -->
+                    <Border Grid.Row="1" 
+        Style="{StaticResource CardStyle}"
+        Margin="0,10,0,0"
+        Padding="0">
+                        <DataGrid x:Name="CallsDataGrid"
+              Style="{StaticResource MtsDataGrid}"
+              ColumnHeaderStyle="{StaticResource MtsDataGridHeader}"
+              AutoGenerateColumns="False"
+              IsReadOnly="True"
+              SelectionMode="Single"
+              SelectionUnit="FullRow"
+              GridLinesVisibility="None"
+              HeadersVisibility="Column"
+              CanUserAddRows="False"
+              CanUserDeleteRows="False"
+              CanUserReorderColumns="False"
+              CanUserResizeColumns="True"
+              CanUserResizeRows="False"
+              CanUserSortColumns="True"
+                            FontSize="14"
+                            HorizontalGridLinesBrush="Transparent"
+              VerticalGridLinesBrush="Transparent">
+
+                            <DataGrid.Resources>
+                                <!-- Стиль для строк -->
+                                <Style TargetType="DataGridRow" BasedOn="{StaticResource {x:Type DataGridRow}}">
+                                    <Setter Property="MinHeight" Value="60"/>
+                                    <Setter Property="BorderBrush" Value="{StaticResource MtsGray}"/>
+                                    <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                    <Setter Property="Background" Value="{StaticResource MtsWhite}"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="{StaticResource MtsLightGray}"/>
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="{StaticResource MtsLightRed}"/>
+                                            <Setter Property="Foreground" Value="{StaticResource MtsWhite}"/>
+                                            <Setter Property="BorderBrush" Value="{StaticResource MtsRed}"/>
+                                            <Setter Property="BorderThickness" Value="0,0,0,2"/>
+                                        </Trigger>
+                                        <Trigger Property="AlternationIndex" Value="1">
+                                            <Setter Property="Background" Value="{StaticResource MtsLightGray}"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+
+                                <!-- Стиль для ячеек -->
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                    <Setter Property="BorderBrush" Value="Transparent"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="Padding" Value="15,10"/>
+                                    <!-- Увеличили внутренние отступы -->
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                    <Setter Property="HorizontalAlignment" Value="Left"/>
+                                    <Setter Property="Foreground" Value="{StaticResource MtsBlack}"/>
+                                    <Setter Property="FontSize" Value="14"/>
+                                    <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
+                                    <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="DataGridCell">
+                                                <Border Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    Padding="{TemplateBinding Padding}">
+                                                    <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Foreground" Value="{StaticResource MtsWhite}"/>
+                                            <Setter Property="BorderBrush" Value="{StaticResource MtsRed}"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+
+                                <!-- Стиль для заголовков колонок -->
+                                <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
+                                    <Setter Property="Background" Value="{StaticResource MtsRed}"/>
+                                    <Setter Property="Foreground" Value="{StaticResource MtsWhite}"/>
+                                    <Setter Property="FontWeight" Value="Bold"/>
+                                    <Setter Property="FontSize" Value="14"/>
+                                    <Setter Property="Height" Value="50"/>
+                                    <!-- Увеличили высоту заголовка -->
+                                    <Setter Property="Padding" Value="15,10"/>
+                                    <Setter Property="BorderBrush" Value="{StaticResource MtsDarkRed}"/>
+                                    <Setter Property="BorderThickness" Value="0,0,0,0"/>
+                                    <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="DataGridColumnHeader">
+                                                <Grid>
+                                                    <Border Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        Padding="{TemplateBinding Padding}">
+                                                        <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                                                    </Border>
+                                                    <Thumb x:Name="PART_LeftHeaderGripper" HorizontalAlignment="Left"/>
+                                                    <Thumb x:Name="PART_RightHeaderGripper" HorizontalAlignment="Right"/>
+                                                </Grid>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="{StaticResource MtsDarkRed}"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.Resources>
+
+                            <DataGrid.Columns>
+                                <!-- Дата и время -->
+                                <DataGridTextColumn Header="📅 Дата и время" 
+                                Binding="{Binding CallDatetime, StringFormat=dd.MM.yyyy HH:mm}"
+                                Width="160">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="FontWeight" Value="SemiBold"/>
+                                            <Setter Property="Foreground" Value="{StaticResource MtsDarkGray}"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <!-- Длительность -->
+                                <DataGridTextColumn Header="⏱️ Длительность" 
+                                Binding="{Binding Duration, StringFormat={}{0} сек}"
+                                Width="160">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                            <Setter Property="FontWeight" Value="SemiBold"/>
+                                            <Setter Property="Foreground" Value="{StaticResource MtsBlue}"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <!-- Результат -->
+                                <DataGridTextColumn Header="✅ Результат" 
+                                Binding="{Binding Result}"
+                                Width="160">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                            <Setter Property="FontWeight" Value="SemiBold"/>
+                                            <Setter Property="Padding" Value="8,4"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Result}" Value="Успешно">
+                                                    <Setter Property="Background" Value="{StaticResource MtsGreen}"/>
+                                                    <Setter Property="Foreground" Value="{StaticResource MtsWhite}"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Result}" Value="Отказ">
+                                                    <Setter Property="Background" Value="{StaticResource MtsRed}"/>
+                                                    <Setter Property="Foreground" Value="{StaticResource MtsWhite}"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Result}" Value="Перенос">
+                                                    <Setter Property="Background" Value="{StaticResource MtsOrange}"/>
+                                                    <Setter Property="Foreground" Value="{StaticResource MtsWhite}"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Result}" Value="Дозвониться не удалось">
+                                                    <Setter Property="Background" Value="{StaticResource MtsDarkGray}"/>
+                                                    <Setter Property="Foreground" Value="{StaticResource MtsWhite}"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <!-- Комментарий -->
+                                <DataGridTextColumn Header="💬 Комментарий" 
+                                Binding="{Binding Comment}"
+                                Width="*"
+                                MinWidth="250">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="TextWrapping" Value="Wrap"/>
+                                            <Setter Property="MaxHeight" Value="50"/>
+                                            <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <!-- Оператор -->
+                                <DataGridTextColumn x:Name="OperatorColumn"
+                                Header="👤 Оператор" 
+                                Binding="{Binding OperatorName}"
+                                Width="180"
+                                Visibility="Collapsed">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="FontWeight" Value="SemiBold"/>
+                                            <Setter Property="Foreground" Value="{StaticResource MtsPurple}"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <!-- Клиент -->
+                                <DataGridTextColumn Header="👥 Клиент" 
+                                Binding="{Binding Client.FullName}"
+                                Width="220">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="FontWeight" Value="SemiBold"/>
+                                            <Setter Property="Foreground" Value="{StaticResource MtsBlack}"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <!-- Услуги -->
+                                <DataGridTextColumn Header="📱 Услуги" 
+                                Binding="{Binding ServicesList}"
+                                Width="300"
+                                MinWidth="200">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="TextWrapping" Value="Wrap"/>
+                                            <Setter Property="MaxHeight" Value="50"/>
+                                            <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+                                            <Setter Property="FontStyle" Value="Italic"/>
+                                            <Setter Property="Foreground" Value="{StaticResource MtsDarkGray}"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- Статусная строка -->
+        <Border Grid.Row="2" 
+                Background="{StaticResource MtsWhite}" 
+                Padding="12"
+                BorderBrush="{StaticResource MtsGray}" 
+                BorderThickness="1,0,0,0">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Grid.Column="0">
-                    <TextBlock x:Name="WelcomeText" 
-                               Text="Загрузка..." 
-                               Foreground="White" 
-                               FontSize="22" 
-                               FontWeight="Bold"/>
-                </StackPanel>
-
-                <TextBlock Grid.Column="1" 
-                           Text="📞 Управление заявками" 
-                           Foreground="White" 
-                           FontSize="16"
-                           FontWeight="SemiBold"
+                <TextBlock x:Name="StatusText" 
+                           Text="Загрузка заявок..." 
+                           Foreground="{StaticResource MtsDarkGray}"
                            VerticalAlignment="Center"/>
+
+                <TextBlock Grid.Column="1"
+                           Text="МТС Телемаркетинг © 2024" 
+                           Foreground="{StaticResource MtsDarkGray}"
+                           VerticalAlignment="Center"
+                           FontSize="11"/>
             </Grid>
-        </Border>
-
-        <!-- Список заявок -->
-        <Border Grid.Row="1" Margin="20" CornerRadius="10" Background="White">
-            <DataGrid x:Name="CallsDataGrid"
-                      AutoGenerateColumns="False"
-                      IsReadOnly="True"
-                      HeadersVisibility="Column"
-                      SelectionMode="Single"
-                      BorderBrush="Transparent"
-                      Background="White">
-
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Дата и время" 
-                                        Binding="{Binding CallDatetime, StringFormat=dd.MM.yyyy HH:mm}"
-                                        Width="150"/>
-                    <DataGridTextColumn Header="Длительность (мин)" 
-                                        Binding="{Binding Duration}"
-                                        Width="120"/>
-                    <DataGridTextColumn Header="Результат" 
-                                        Binding="{Binding Result}"
-                                        Width="150"/>
-                    <DataGridTextColumn Header="Комментарий" 
-                                        Binding="{Binding Comment}"
-                                        Width="250"/>
-                    <DataGridTextColumn Header="Клиент" 
-                                        Binding="{Binding Client.FullName}"
-                                        Width="200"/>
-                    <DataGridTextColumn Header="Услуги" 
-                                        Binding="{Binding ServicesList}"
-                                        Width="250"/>
-                </DataGrid.Columns>
-
-                <DataGrid.CellStyle>
-                    <Style TargetType="DataGridCell">
-                        <Setter Property="BorderThickness" Value="0"/>
-                        <Setter Property="Padding" Value="10"/>
-                        <Setter Property="Foreground" Value="#333333"/>
-                    </Style>
-                </DataGrid.CellStyle>
-
-                <DataGrid.ColumnHeaderStyle>
-                    <Style TargetType="DataGridColumnHeader">
-                        <Setter Property="Background" Value="#0078D7"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="FontWeight" Value="Bold"/>
-                        <Setter Property="Padding" Value="10"/>
-                        <Setter Property="BorderThickness" Value="0"/>
-                    </Style>
-                </DataGrid.ColumnHeaderStyle>
-
-                <DataGrid.RowStyle>
-                    <Style TargetType="DataGridRow">
-                        <Setter Property="BorderBrush" Value="#E0E0E0"/>
-                        <Setter Property="BorderThickness" Value="0,0,0,1"/>
-                    </Style>
-                </DataGrid.RowStyle>
-            </DataGrid>
-        </Border>
-
-        <!-- Статус -->
-        <Border Grid.Row="2" 
-                Background="White" 
-                Padding="15"
-                BorderBrush="#E0E0E0" 
-                BorderThickness="0,1,0,0">
-            <TextBlock x:Name="StatusText" 
-                       Text="Загрузка заявок..." 
-                       Foreground="#666666"
-                       HorizontalAlignment="Center"/>
         </Border>
     </Grid>
 </Window>

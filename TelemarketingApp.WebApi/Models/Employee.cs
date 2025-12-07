@@ -19,6 +19,8 @@ public partial class Employee
 
     public string? Email { get; set; }
 
+    public ulong IsActive { get; set; }
+
     public int? RoleId { get; set; }
 
     public virtual ICollection<Call> Calls { get; set; } = new List<Call>();

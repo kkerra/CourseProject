@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using TelemarketingApp.WebApi.Contexts;
+using TelemarketingApp.WebApi.DataContexts;
 using TelemarketingApp.WebApi.Models;
 
 namespace TelemarketingApp.WebApi.Controllers
@@ -76,12 +76,29 @@ namespace TelemarketingApp.WebApi.Controllers
         // POST: api/Clients
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Client>> PostClient(Client client)
+        public async Task<ActionResult<Client>> CreateClient([FromBody] CreateClientRequest request)
         {
+            if (string.IsNullOrWhiteSpace(request.Surname) ||
+                string.IsNullOrWhiteSpace(request.Name) ||
+                string.IsNullOrWhiteSpace(request.PhoneNumber))
+            {
+                return BadRequest(new { message = "Фамилия, имя и телефон обязательны" });
+            }
+
+            var client = new Client
+            {
+                Surname = request.Surname,
+                Name = request.Name,
+                Patronymic = request.Patronymic,
+                Address = request.Address,
+                PhoneNumber = request.PhoneNumber,
+                InteractionStatus = request.InteractionStatus ?? "Новый"
+            };
+
             _context.Clients.Add(client);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetClient", new { id = client.ClientId }, client);
+            return CreatedAtAction(nameof(CreateClient), new { id = client.ClientId }, client);
         }
 
         // DELETE: api/Clients/5
@@ -104,5 +121,15 @@ namespace TelemarketingApp.WebApi.Controllers
         {
             return _context.Clients.Any(e => e.ClientId == id);
         }
+    }
+
+    public class CreateClientRequest
+    {
+        public string Surname { get; set; }
+        public string Name { get; set; }
+        public string? Patronymic { get; set; }
+        public string? Address { get; set; }
+        public string PhoneNumber { get; set; }
+        public string? InteractionStatus { get; set; }
     }
 }

@@ -4,6 +4,155 @@
              xmlns:local="clr-namespace:TelemarketingApp.Desktop"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <!-- Цветовая палитра МТС -->
+        <SolidColorBrush x:Key="MtsRed">#E30613</SolidColorBrush>
+        <SolidColorBrush x:Key="MtsDarkRed">#B30000</SolidColorBrush>
+        <SolidColorBrush x:Key="MtsLightRed">#FF4D4D</SolidColorBrush>
+        <SolidColorBrush x:Key="MtsWhite">#FFFFFF</SolidColorBrush>
+        <SolidColorBrush x:Key="MtsLightGray">#F5F5F5</SolidColorBrush>
+        <SolidColorBrush x:Key="MtsGray">#E0E0E0</SolidColorBrush>
+        <SolidColorBrush x:Key="MtsDarkGray">#666666</SolidColorBrush>
+        <SolidColorBrush x:Key="MtsBlack">#333333</SolidColorBrush>
+        <SolidColorBrush x:Key="MtsGreen">#27AE60</SolidColorBrush>
+        <SolidColorBrush x:Key="MtsBlue">#3498DB</SolidColorBrush>
+        <SolidColorBrush x:Key="MtsOrange">#F39C12</SolidColorBrush>
+        <SolidColorBrush x:Key="MtsPurple">#9B59B6</SolidColorBrush>
+
+        <!-- Общие стили кнопок -->
+        <Style x:Key="MtsButton" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource MtsRed}"/>
+            <Setter Property="Foreground" Value="{StaticResource MtsWhite}"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Padding" Value="20,0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="5" 
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource MtsDarkRed}"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{StaticResource MtsGray}"/>
+                    <Setter Property="Foreground" Value="{StaticResource MtsDarkGray}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Стиль для текстовых полей -->
+        <Style x:Key="MtsTextBox" TargetType="TextBox">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="BorderBrush" Value="{StaticResource MtsGray}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="{StaticResource MtsWhite}"/>
+            <Style.Triggers>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="BorderBrush" Value="{StaticResource MtsRed}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Стиль для ComboBox -->
+        <Style x:Key="MtsComboBox" TargetType="ComboBox">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="BorderBrush" Value="{StaticResource MtsGray}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="{StaticResource MtsWhite}"/>
+        </Style>
+
+        <!-- Стиль для DataGrid -->
+        <Style x:Key="MtsDataGrid" TargetType="DataGrid">
+            <Setter Property="Background" Value="{StaticResource MtsWhite}"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="RowBackground" Value="{StaticResource MtsWhite}"/>
+            <Setter Property="AlternatingRowBackground" Value="{StaticResource MtsLightGray}"/>
+            <Setter Property="GridLinesVisibility" Value="None"/>
+            <Setter Property="HeadersVisibility" Value="Column"/>
+            <Setter Property="AutoGenerateColumns" Value="False"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="SelectionMode" Value="Single"/>
+            <Setter Property="SelectionUnit" Value="FullRow"/>
+        </Style>
+
+        <!-- Стиль для заголовков DataGrid -->
+        <Style x:Key="MtsDataGridHeader" TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="{StaticResource MtsRed}"/>
+            <Setter Property="Foreground" Value="{StaticResource MtsWhite}"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Height" Value="40"/>
+        </Style>
+
+        <!-- Стиль для ячеек DataGrid -->
+        <Style x:Key="MtsDataGridCell" TargetType="DataGridCell">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Foreground" Value="{StaticResource MtsBlack}"/>
+        </Style>
+
+        <!-- Стиль для заголовков окон -->
+        <Style x:Key="WindowTitleStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="{StaticResource MtsRed}"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,0,0,20"/>
+        </Style>
+
+        <!-- Стиль для заголовков секций -->
+        <Style x:Key="SectionTitleStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="{StaticResource MtsBlack}"/>
+            <Setter Property="Margin" Value="0,0,0,15"/>
+        </Style>
+
+        <!-- Стиль для карточек -->
+        <Style x:Key="CardStyle" TargetType="Border">
+            <Setter Property="Background" Value="{StaticResource MtsWhite}"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="10" 
+                                      Opacity="0.1" 
+                                      ShadowDepth="2"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="RequiredFieldLabelStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin" Value="0,0,20,15"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="{StaticResource MtsRed}"/>
+        </Style>
+
+        <Style x:Key="HintTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Foreground" Value="{StaticResource MtsDarkGray}"/>
+            <Setter Property="FontStyle" Value="Italic"/>
+            <Setter Property="Margin" Value="0,2,0,0"/>
+        </Style>
+
     </Application.Resources>
 </Application>

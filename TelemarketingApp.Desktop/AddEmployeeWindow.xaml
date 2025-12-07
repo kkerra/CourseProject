@@ -1,0 +1,212 @@
+﻿<Window x:Class="TelemarketingApp.Desktop.AddEmployeeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TelemarketingApp.Desktop"
+        mc:Ignorable="d"
+        Title="Добавление нового сотрудника" 
+        Height="700" 
+        Width="500"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+
+    <Grid Background="{StaticResource MtsLightGray}">
+        <Border Style="{StaticResource CardStyle}" Margin="20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Заголовок -->
+                    <RowDefinition Height="*"/>
+                    <!-- Форма -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Кнопки -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Статус -->
+                </Grid.RowDefinitions>
+
+                <!-- Заголовок -->
+                <TextBlock Grid.Row="0"
+                           Text="Добавление нового сотрудника" 
+                           Style="{StaticResource WindowTitleStyle}"
+                           Margin="0,0,0,20"/>
+
+                <!-- Форма ввода -->
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <!-- Фамилия -->
+                        <TextBlock Text="Фамилия *" 
+                                   Style="{StaticResource RequiredFieldLabelStyle}"/>
+                        <TextBox x:Name="SurnameTextBox" 
+                                 Style="{StaticResource MtsTextBox}"
+                                 Margin="0,0,0,5">
+                            <TextBox.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="5"/>
+                                </Style>
+                            </TextBox.Resources>
+                        </TextBox>
+                        <TextBlock Text="Обязательное поле" Style="{StaticResource HintTextStyle}"/>
+
+                        <!-- Имя -->
+                        <TextBlock Text="Имя *" 
+                                   Style="{StaticResource RequiredFieldLabelStyle}"/>
+                        <TextBox x:Name="NameTextBox" 
+                                 Style="{StaticResource MtsTextBox}"
+                                 Margin="0,0,0,5">
+                            <TextBox.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="5"/>
+                                </Style>
+                            </TextBox.Resources>
+                        </TextBox>
+                        <TextBlock Text="Обязательное поле" Style="{StaticResource HintTextStyle}"/>
+
+                        <!-- Отчество -->
+                        <TextBlock Text="Отчество" 
+                                   FontSize="14"
+                                   Foreground="{StaticResource MtsDarkGray}"
+                                   Margin="0,10,0,5"/>
+                        <TextBox x:Name="PatronymicTextBox" 
+                                 Style="{StaticResource MtsTextBox}"
+                                 Margin="0,0,0,5">
+                            <TextBox.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="5"/>
+                                </Style>
+                            </TextBox.Resources>
+                        </TextBox>
+                        <TextBlock Text="Необязательное поле" Style="{StaticResource HintTextStyle}"/>
+
+                        <!-- Логин -->
+                        <TextBlock Text="Логин *" 
+                                   Style="{StaticResource RequiredFieldLabelStyle}"/>
+                        <TextBox x:Name="LoginTextBox" 
+                                 Style="{StaticResource MtsTextBox}"
+                                 Margin="0,0,0,5">
+                            <TextBox.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="5"/>
+                                </Style>
+                            </TextBox.Resources>
+                        </TextBox>
+                        <TextBlock Text="Уникальный логин для входа в систему" Style="{StaticResource HintTextStyle}"/>
+
+                        <!-- Пароль -->
+                        <TextBlock Text="Пароль *" 
+                                   Style="{StaticResource RequiredFieldLabelStyle}"/>
+                        <PasswordBox x:Name="PasswordBox" 
+                                     Height="40"
+                                     FontSize="14"
+                                     Padding="10"
+                                     Margin="0,0,0,5"
+                                     BorderBrush="{StaticResource MtsGray}"
+                                     BorderThickness="1"
+                                     Background="{StaticResource MtsWhite}">
+                            <PasswordBox.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="5"/>
+                                </Style>
+                            </PasswordBox.Resources>
+                            <PasswordBox.Style>
+                                <Style TargetType="PasswordBox">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsFocused" Value="True">
+                                            <Setter Property="BorderBrush" Value="{StaticResource MtsRed}"/>
+                                        </Trigger>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="BorderBrush" Value="{StaticResource MtsDarkGray}"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </PasswordBox.Style>
+                        </PasswordBox>
+                        <TextBlock Text="Минимум 6 символов" Style="{StaticResource HintTextStyle}"/>
+
+                        <!-- Email -->
+                        <TextBlock Text="Email" 
+                                   FontSize="14"
+                                   Foreground="{StaticResource MtsDarkGray}"
+                                   Margin="0,10,0,5"/>
+                        <TextBox x:Name="EmailTextBox" 
+                                 Style="{StaticResource MtsTextBox}"
+                                 Margin="0,0,0,5">
+                            <TextBox.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="5"/>
+                                </Style>
+                            </TextBox.Resources>
+                        </TextBox>
+                        <TextBlock Text="Например: user@company.ru" Style="{StaticResource HintTextStyle}"/>
+
+                        <!-- Роль -->
+                        <TextBlock Text="Роль *" 
+                                   Style="{StaticResource RequiredFieldLabelStyle}"/>
+                        <ComboBox x:Name="RoleComboBox" 
+                                  Style="{StaticResource MtsComboBox}"
+                                  Margin="0,0,0,20">
+                            <ComboBox.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="5"/>
+                                </Style>
+                            </ComboBox.Resources>
+                            <ComboBoxItem Content="Оператор" Tag="1"/>
+                            <ComboBoxItem Content="Супервайзер" Tag="2"/>
+                        </ComboBox>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <!-- Кнопки -->
+                <Border Grid.Row="2"
+                        Background="{StaticResource MtsLightGray}"
+                        CornerRadius="5"
+                        Padding="10"
+                        Margin="0,20,0,10">
+                    <StackPanel Orientation="Horizontal" 
+                                HorizontalAlignment="Center">
+                        <Button x:Name="SaveButton" 
+                                Content="💾 Сохранить" 
+                                Style="{StaticResource MtsButton}"
+                                Background="{StaticResource MtsGreen}"
+                                Width="150"
+                                Margin="0,0,15,0"
+                                Click="SaveButton_Click">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="5"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+
+                        <Button x:Name="CancelButton" 
+                                Content="✕ Отмена" 
+                                Style="{StaticResource MtsButton}"
+                                Background="{StaticResource MtsDarkGray}"
+                                Width="150"
+                                Click="CancelButton_Click">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="5"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                    </StackPanel>
+                </Border>
+
+                <!-- Статус -->
+                <Border Grid.Row="3"
+                        Background="{StaticResource MtsWhite}"
+                        CornerRadius="5"
+                        Padding="10"
+                        BorderBrush="{StaticResource MtsGray}"
+                        BorderThickness="1">
+                    <TextBlock x:Name="StatusText" 
+                               Text="" 
+                               Foreground="{StaticResource MtsDarkGray}"
+                               HorizontalAlignment="Center"
+                               TextWrapping="Wrap"/>
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
