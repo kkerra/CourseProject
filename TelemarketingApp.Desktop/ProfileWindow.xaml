@@ -49,7 +49,6 @@
 
                             <!-- Информация о сотруднике -->
                             <StackPanel x:Name="EmployeeInfoPanel" Margin="0,0,0,20">
-                                <!-- Информация будет заполняться в коде -->
                             </StackPanel>
                         </StackPanel>
                     </Border>
@@ -74,7 +73,6 @@
                                                Margin="0,0,0,10"/>
 
                                     <StackPanel x:Name="StatisticsPanel">
-                                        <!-- Статистика будет заполняться в коде -->
                                     </StackPanel>
                                 </StackPanel>
                             </Border>
@@ -91,7 +89,6 @@
 
                                     <!-- Простой график в виде прогресс-баров -->
                                     <StackPanel x:Name="SuccessChartPanel" Margin="0,10,0,0">
-                                        <!-- График будет заполняться в коде -->
                                     </StackPanel>
                                 </StackPanel>
                             </Border>

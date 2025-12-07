@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelemarketingApp.WebApi", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelemarketingApp.Desktop", "TelemarketingApp.Desktop\TelemarketingApp.Desktop.csproj", "{5D2F3F8F-9939-441B-94B8-13B85BEC0388}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelemarketingApp.Test", "TelemarketingApp.Test\TelemarketingApp.Test.csproj", "{CB679BD3-91A7-4811-AA9D-8BFFF053EA78}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{5D2F3F8F-9939-441B-94B8-13B85BEC0388}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D2F3F8F-9939-441B-94B8-13B85BEC0388}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D2F3F8F-9939-441B-94B8-13B85BEC0388}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB679BD3-91A7-4811-AA9D-8BFFF053EA78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB679BD3-91A7-4811-AA9D-8BFFF053EA78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB679BD3-91A7-4811-AA9D-8BFFF053EA78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB679BD3-91A7-4811-AA9D-8BFFF053EA78}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

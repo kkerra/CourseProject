@@ -178,27 +178,27 @@
 
                     <!-- Таблица заявок -->
                     <Border Grid.Row="1" 
-        Style="{StaticResource CardStyle}"
-        Margin="0,10,0,0"
-        Padding="0">
+                        Style="{StaticResource CardStyle}"
+                        Margin="0,10,0,0"
+                        Padding="0">
                         <DataGrid x:Name="CallsDataGrid"
-              Style="{StaticResource MtsDataGrid}"
-              ColumnHeaderStyle="{StaticResource MtsDataGridHeader}"
-              AutoGenerateColumns="False"
-              IsReadOnly="True"
-              SelectionMode="Single"
-              SelectionUnit="FullRow"
-              GridLinesVisibility="None"
-              HeadersVisibility="Column"
-              CanUserAddRows="False"
-              CanUserDeleteRows="False"
-              CanUserReorderColumns="False"
-              CanUserResizeColumns="True"
-              CanUserResizeRows="False"
-              CanUserSortColumns="True"
-                            FontSize="14"
-                            HorizontalGridLinesBrush="Transparent"
-              VerticalGridLinesBrush="Transparent">
+                          Style="{StaticResource MtsDataGrid}"
+                          ColumnHeaderStyle="{StaticResource MtsDataGridHeader}"
+                          AutoGenerateColumns="False"
+                          IsReadOnly="True"
+                          SelectionMode="Single"
+                          SelectionUnit="FullRow"
+                          GridLinesVisibility="None"
+                          HeadersVisibility="Column"
+                          CanUserAddRows="False"
+                          CanUserDeleteRows="False"
+                          CanUserReorderColumns="False"
+                          CanUserResizeColumns="True"
+                          CanUserResizeRows="False"
+                          CanUserSortColumns="True"
+                          FontSize="14"
+                          HorizontalGridLinesBrush="Transparent"
+                          VerticalGridLinesBrush="Transparent">
 
                             <DataGrid.Resources>
                                 <!-- Стиль для строк -->

@@ -12,13 +12,9 @@
     <Grid Background="{StaticResource MtsLightGray}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <!-- Заголовок -->
             <RowDefinition Height="Auto"/>
-            <!-- Панель управления -->
             <RowDefinition Height="*"/>
-            <!-- Список сотрудников -->
             <RowDefinition Height="Auto"/>
-            <!-- Статус -->
         </Grid.RowDefinitions>
 
         <!-- Заголовок окна -->
@@ -91,7 +87,6 @@
                       SelectionMode="Single">
 
                 <DataGrid.Resources>
-                    <!-- Стиль для строк -->
                     <Style TargetType="DataGridRow">
                         <Setter Property="BorderBrush" Value="{StaticResource MtsGray}"/>
                         <Setter Property="BorderThickness" Value="0,0,0,1"/>
@@ -108,7 +103,6 @@
                         </Style.Triggers>
                     </Style>
 
-                    <!-- Стиль для кнопок действий (исправленный) -->
                     <Style x:Key="ActionButtonStyle" TargetType="Button">
                         <Setter Property="Width" Value="30"/>
                         <Setter Property="Height" Value="30"/>
@@ -173,11 +167,9 @@
                                 <Setter Property="Foreground" Value="{StaticResource MtsWhite}"/>
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding RoleId}" Value="2">
-                                        <!-- Менеджер -->
                                         <Setter Property="Background" Value="{StaticResource MtsPurple}"/>
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding RoleId}" Value="1">
-                                        <!-- Оператор -->
                                         <Setter Property="Background" Value="{StaticResource MtsBlue}"/>
                                     </DataTrigger>
                                 </Style.Triggers>

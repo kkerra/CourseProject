@@ -92,7 +92,6 @@
                         </TextBox>
                         <TextBlock Text="Уникальный логин для входа в систему" Style="{StaticResource HintTextStyle}"/>
 
-                        <!-- Пароль (опционально) -->
                         <TextBlock Text="Новый пароль" 
                                    FontSize="14"
                                    Foreground="{StaticResource MtsDarkGray}"

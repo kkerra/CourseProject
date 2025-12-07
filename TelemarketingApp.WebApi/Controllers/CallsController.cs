@@ -140,10 +140,6 @@ namespace TelemarketingApp.WebApi.Controllers
         {
             try
             {
-                // Логируем полученные данные для отладки
-                Console.WriteLine($"Получены данные: ServiceTitle = '{callDto.ServiceTitle}'");
-
-                // 1. Проверяем или создаем клиента
                 var client = await _context.Clients
                     .FirstOrDefaultAsync(c => c.PhoneNumber == callDto.ClientPhone);
 
