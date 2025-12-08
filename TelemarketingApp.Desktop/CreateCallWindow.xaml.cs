@@ -30,7 +30,7 @@ namespace TelemarketingApp.Desktop
         {
             InitializeComponent();
 
-            _httpClient = new HttpClient { BaseAddress = new Uri("http://localhost:5171/")};
+            _httpClient = new HttpClient { BaseAddress = new Uri("http://localhost:5000/")};
             _employeeId = employeeId;
             ConnectionDatePicker.SelectedDate = DateTime.Now;
             ResultComboBox.SelectedIndex = 0;

@@ -26,7 +26,7 @@ namespace TelemarketingApp.Desktop
 
         private HttpClient _httpClient = new HttpClient()
         {
-            BaseAddress = new Uri("http://localhost:5171/")
+            BaseAddress = new Uri("http://localhost:5000/")
         };
 
         private List<ClientData> _allClients = new List<ClientData>();

@@ -27,7 +27,7 @@ namespace TelemarketingApp.Desktop
             InitializeComponent();
             _httpClient = new HttpClient()
             {
-                BaseAddress = new Uri("http://localhost:5171/")
+                BaseAddress = new Uri("http://localhost:5000/")
             };
         }
 

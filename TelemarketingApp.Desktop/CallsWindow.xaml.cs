@@ -19,7 +19,7 @@ namespace TelemarketingApp.Desktop
         public CallsWindow()
         {
             InitializeComponent();
-            _httpClient.BaseAddress = new Uri("http://localhost:5171/");
+            _httpClient.BaseAddress = new Uri("http://localhost:5000/");
         }
 
         private async void CallsWindow_Loaded(object sender, RoutedEventArgs e)

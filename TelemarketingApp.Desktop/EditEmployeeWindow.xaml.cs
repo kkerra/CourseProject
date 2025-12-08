@@ -23,7 +23,7 @@ namespace TelemarketingApp.Desktop
     {
         private HttpClient _httpClient = new HttpClient()
         {
-            BaseAddress = new Uri("http://localhost:5171/")
+            BaseAddress = new Uri("http://localhost:5000/")
         };
 
         private readonly EmployeeData _employee;

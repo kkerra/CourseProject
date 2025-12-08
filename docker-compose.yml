@@ -1,0 +1,38 @@
+services:
+  mysql-db:
+    image: mysql:8.0
+    container_name: telemarketing-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root123456
+      MYSQL_DATABASE: course_project  # Создаст базу автоматически
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init-scripts:/docker-entrypoint-initdb.d  # Монтируем скрипты
+    restart: always
+    # Добавьте healthcheck для надежности
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot123456"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  telemarketing-api:
+    build:
+      context: ./TelemarketingApp.WebApi
+      dockerfile: Dockerfile
+    container_name: telemarketing-api
+    ports:
+      - "5000:8080"
+    depends_on:
+      mysql-db:
+        condition: service_healthy  # Ждем, пока БД станет здоровой
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=mysql-db;Port=3306;Database=course_project;user=root;Pwd=root123456;
+
+volumes:
+  mysql_data:
